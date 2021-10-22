@@ -12,3 +12,9 @@ The program can handle FASTA format only. You can use
 more than one FASTA records.
 
 The results can be exported as CSV files (tab separated).
+
+Do not need to install, just run. I have tested on Windows 7, 8.1, 10
+
+You need only .Net 4.5.1 to run it.
+
+Visual Studio 2015 project file included.
