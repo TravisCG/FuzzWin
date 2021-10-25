@@ -54,6 +54,38 @@ namespace FuzzWin
                     case 'c':
                         reverse.Append('G');
                         break;
+                    case 'R':
+                    case 'r':
+                        reverse.Append('Y');
+                        break;
+                    case 'Y':
+                    case 'y':
+                        reverse.Append('R');
+                        break;
+                    case 'K':
+                    case 'k':
+                        reverse.Append('M');
+                        break;
+                    case 'M':
+                    case 'm':
+                        reverse.Append('K');
+                        break;
+                    case 'B':
+                    case 'b':
+                        reverse.Append('V');
+                        break;
+                    case 'V':
+                    case 'v':
+                        reverse.Append('B');
+                        break;
+                    case 'D':
+                    case 'd':
+                        reverse.Append('H');
+                        break;
+                    case 'H':
+                    case 'h':
+                        reverse.Append('D');
+                        break;
                     default:
                         reverse.Append(seq[i]);
                         break;
@@ -65,6 +97,7 @@ namespace FuzzWin
         void fuzznuc(string header, string seq, string pattern, int mismatch, bool iscomplement)
         {
             string upattern = pattern.ToUpper();
+            Match nucmatch = new Match();
             for(int i = 0; i < seq.Length - upattern.Length; i++)
             {
                 string subseq = seq.Substring(i, upattern.Length).ToUpper();
@@ -72,14 +105,13 @@ namespace FuzzWin
                 bool target = true;
                 for(int j = 0; j < upattern.Length; j++)
                 {
-                    if(subseq[j] != upattern[j])
+                    char pc = upattern[j];
+                    char sc = subseq[j];
+                    m = m + nucmatch.getmatch(pc, sc);
+                    if(m > mismatch)
                     {
-                        m++;
-                        if(m > mismatch)
-                        {
-                            target = false;
-                            break;
-                        }
+                        target = false;
+                        break;
                     }
                 }
                 if (target)
